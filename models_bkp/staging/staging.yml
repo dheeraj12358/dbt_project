@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Cleaned customers staging model"
+    columns:
+      - name: customer_id
+        description: "Primary key for customers"
+        test:
+          - not_null
+          - unique
+  - name: stg_orders
+    description: "Cleaned orders stagging model with calculations"
+    columns:
+      - name: order_id
+        test:
+          - not_null
+          - unique
+      - name: customer_id
+        test:
+          - not_null
+          - relationships:
+            to: ref('stg_customers')

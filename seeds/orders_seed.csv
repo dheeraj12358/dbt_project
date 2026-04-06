@@ -1,0 +1,18 @@
+order_id,customer_id,product_name,product_category,quantity,price,updated_at
+1,101,Laptop,Electronics,1,60000,01-01-2024 10:00
+2,102,Mobile,Electronics,2,20000,02-01-2024 11:30
+3,103,Desk,Office,1,12000,03-01-2024 09:15
+4,104,Chair,Office,4,5000,04-01-2024 14:20
+5,105,Headphones,Electronics,3,3000,05-01-2024 16:45
+6,106,Notebook,Stationery,10,150,06-01-2024 08:30
+7,107,Pen,Stationery,20,50,07-01-2024 12:00
+8,108,Monitor,Electronics,2,15000,08-01-2024 15:00
+9,109,Keyboard,Electronics,1,2500,09-01-2024 10:30
+10,110,Mouse,Electronics,1,1500,10-01-2024 11:00
+11,111,RAMunz,Electronics,1,2500,09-01-2024 10:30
+12,112,Motherboard,Electronics,1,1500,10-01-2025 11:00
+13,113,RAMAN,Electronics,1,500,12-01-2026 11:30
+14,114,Motherboard,Electronics,1,5000,14-01-2026 12:00
+15,115,MotherboardNew,Hardware,1,5000,15-01-2026 21:00
+16,,null,error,1,10,
+17,1111,Invalid,Error Row,1,12,

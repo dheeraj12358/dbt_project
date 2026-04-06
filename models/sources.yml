@@ -1,0 +1,9 @@
+version: 2
+sources:
+  - name: demo_dag_sources
+    database: postgress
+    schema: raw
+    tables:
+      - name: customers
+      - name: orders
+      - name: orders_seed

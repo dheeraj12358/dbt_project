@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: fact_orders1
+    description: >
+      Incremental fact table capturing order-level transactions.
+      This model applies change data capture logic to identify new and updated records
+      and computes derived metrics such as total order amount.
+
+    meta:
+      owner: "Data Engineering Team"
+      domain: "sales"
+      layer: "fact"
+      criticality: "high"
+      sla: "daily"
+      source: "orders_seed"
+
+    config:
+      tags: ["fact", "incremental", "sales"]
+
+    columns:
+      - name: order_id
+        description: "Unique business identifier for each order."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Identifier of the customer placing the order (natural key)."
+        tests:
+          - not_null
+
+      - name: product_name
+        description: "Name of the product ordered."
+
+      - name: product_category
+        description: "Category of the product for analytical grouping."
+
+      - name: quantity
+        description: "Number of units purchased in the order."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "quantity > 0"
+
+      - name: price
+        description: "Unit price of the product at the time of order."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "price >= 0"
+
+      - name: total_amount
+        description: "Total order value calculated as quantity multiplied by price."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: "total_amount >= 0"
+
+      - name: updated_at
+        description: "Timestamp of the last update received from the source system."
+        tests:
+          - not_null
