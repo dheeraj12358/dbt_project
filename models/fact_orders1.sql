@@ -9,6 +9,7 @@ WITH source_data AS (
     SELECT
         order_id,
         customer_id,
+        extract(year from current_date)::int as order_year,
         product_name,
         product_category,
         quantity,

@@ -1,0 +1,45 @@
+name: dbt Nightly
+
+on:
+  # Run every night at 00:00 UTC
+  schedule:
+    -cron: '0 0 * * * '
+  # Allow manual runs from the GitHub UI (useful for demos)
+workflow_dispatch:
+
+jobs:
+  nightly-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: action/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt (postgres)
+        run: |
+          pip install dbt-postgres
+
+    # Use the CI profile in .dbt/profile.yml (we created earliar)
+      - name: Run dbt compile (nightly)
+        run: |
+          dbt --version
+          dbt compile --profiles-dir .dbt
+
+    # Create a simple run_results.json (for artifacts /demo)
+      - name: Create run_results.json
+        run: |
+          mkdir -p target
+        echo '{ "metadata": {"job": "nightly", "mode": "compile-run" }}'
+
+    # Upload artifacts so we can inspect from Actions
+      - name: Upload dbt nightly artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+        name: dbt-nightly-artifacts
+        path: target
+
