@@ -1,3 +1,4 @@
+Demo: Inspect CI logs & test artifacts
 Welcome to your new dbt project!
 
 ### Using the starter project
